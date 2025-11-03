@@ -13,7 +13,7 @@ First, it is important to understand what are the pieces of a CPU. We can split 
 
 The levels can be illustrated in here :
 
-![cpu levels](./medias/img/packages.svg)
+![cpu levels](https://recherche.noiraudes.net/ecoinfo/numres/ressources/TP/img/tikz/953150b9fa34a4d54ff2aeef84e5d8f029f85687.svg)
 
 ### *Core* level
 

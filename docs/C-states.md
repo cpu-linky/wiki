@@ -13,6 +13,8 @@ First, it is important to understand what are the pieces of a CPU. We can split 
 
 The levels can be illustrated in here :
 
+![cpu levels](./medias/img/packages.svg)
+
 ### *Core* level
 
 First, the *core* refers to only the cores, as they might be multiples. It excludes the GPU integrated unit (if concerned) but also all **shared caches*. Nowadays, we have CPUs with at leats 4 cores so in general, L1 cache is exclusive to a core but L2 and L3 are shared. 

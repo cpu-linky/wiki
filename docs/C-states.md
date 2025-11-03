@@ -33,6 +33,29 @@ The *package* level refers to all *core* levels, the integrated GPU and all cach
 
 This level is refering to only the *Dynamic Random Access Memory*. We will probably not use this very much. 
 
+# Threads VS Core VS Package C-States
+
+**C-States** can therefore be seen at 3 differents levels :
+
+1. Threads C-States
+2. Core C-States
+3. Package C-States
+
+In a general way, a package is made of multiple cores all made of multiple threads. More details below. 
+
+## TC-States
+
+First, software request C-States on a thread level. 
+
+Threads exists not on a physical level, only a *logical* one. Therefore, a **Thread C-State** or `TCx` is not a *true* and complete C-State. In facts, minimal if any power actions are taking when a thread enters a C-State level without being in a Core C-State level. 
+
+> [!TIP]
+> On CPUs without multithreading, thread and core C-State are exactly the same. 
+
+## Core C-States
+
+**Core C-State** or `Cx` or `CCx` represents if the core is on or off. 
+
 # Ressources
 
 - [official Intel documentation of CPU power in 12th generation model](https://edc.intel.com/content/www/us/en/design/ipla/software-development-platforms/client/platforms/alder-lake-desktop/12th-generation-intel-core-processors-datasheet-volume-1-of-2/011/power-management/)

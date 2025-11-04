@@ -72,6 +72,18 @@ Threads exists not on a physical level, only a *logical* one. Therefore, a **Thr
 
 # Requesting and entering C-States
 
+The software (ie programs or OS) can ony request C-State at the thread level. It means that until all threads of the same CPU core are on the same level, the core cannot enter a `CCx` deeper than `CC0`. 
+
+When all threads on a core are on the same level, the CPU resolves the C-State level. It is **not** decided by the OS. The OS can only request states at the thread level, but the decision belongs to the CPU itself. 
+
+In order to request C-States, there are 2 differents ways : 
+
+- `MWAIT` : this is a hint function, and it can pass a precise substate to suggest the CPU which state would be better
+- `P_LVLx` *[legacy]* : legacy method of I/O reads from the ACPI-defined processor clock control registers
+
+> [!TIP]
+> The support of `MWAIT` instructions can be tested trough the `cpuid` instruction, with `CPUID.01H:ECX.MONITOR[bit 3]`. See [our repo about `cpuid`](https://github.com/cpu-linky/cpuid) for easy interraction
+
 # Ressources
 
 - [official Intel documentation of CPU power in 12th generation model](https://edc.intel.com/content/www/us/en/design/ipla/software-development-platforms/client/platforms/alder-lake-desktop/12th-generation-intel-core-processors-datasheet-volume-1-of-2/011/power-management/)

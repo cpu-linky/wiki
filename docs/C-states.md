@@ -70,6 +70,13 @@ Threads exists not on a physical level, only a *logical* one. Therefore, a **Thr
 > [!NOTE]
 > As we can see, deeper `CCx` induces longer wake up latency, and this is why states need to be entered carefully. The lantencies in this table are from a specific article and might vary from one model to another.  
 
+## Package C-States
+
+A package C-State or `PCx` request is determined by the value of the lowest `CCx` among all cores. It means that i requires that all core are at least in `CCx` with $ x > 1 $ .
+
+> [!NOTE]
+> `PCx` are slighly more complex than the other, and we need to check if they are relevant for us before investigating more into them
+
 # Requesting and entering C-States
 
 The software (ie programs or OS) can ony request C-State at the thread level. It means that until all threads of the same CPU core are on the same level, the core cannot enter a `CCx` deeper than `CC0`. 

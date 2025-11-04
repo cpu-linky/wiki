@@ -1,4 +1,4 @@
-**C-states** provide the ability to request that the CPU enters a low-power state y turning off some pieces of logic or even cores. 
+**C-states** provide the ability to request that the CPU enters a low-power state by turning off some pieces of logic or even cores. 
 
 # Packages in a CPU
 
@@ -54,7 +54,23 @@ Threads exists not on a physical level, only a *logical* one. Therefore, a **Thr
 
 ## Core C-States
 
-**Core C-State** or `Cx` or `CCx` represents if the core is on or off. 
+**Core C-State** or `Cx` or `CCx` represents if the core is on or off. When executing instructions, a core is always into `C0` state. When it does not, it enters various `Cx` states. If all threads on a core are in a `TC` state, then the full core enters a core C-State. 
+
+`CCx` are defined by the constructor and can therefore be slightly distinct from one model to another. But generally we have the following states. 
+
+| Core C-State | Wake Latency | Description |
+|---|---|---|
+| CC0 | Na | The active state (code executing): At least one thread is actively executing in this state. Autonomous clock gating is common for unused logic blocks. |
+| CC1 |  ~1µs | Core clock gated: In CC1, the core clocks are (mostly) gated. Some clocks may still be active (for example, to service external snoops), but dynamic power is driven close to zero. Core caches and TLBs are maintained, coherent, and available. |
+| CC1e | ~1µs + transition  | Core C1 + lowest frequency and voltage operating point |
+| CC3 | ~50-100µs | Clocks gated and request for retention voltage: Processor state is maintained, but voltage is allowed to drop to Vret. L1 + L2 (core) caches are flushed. Core TLBs are flushed. |
+| CC6 | ~ 50-100 µs | Power gating: The core is power gated (voltage at 0). L1 + L2 (core) caches are flushed. Core TLBs are flushed. Processor state is saved outside the core (and restored on a wake). |
+| CC7-CC10 | various | CC6 with extra savings outside the core: Additional states deeper than CC6 exist on certain CPUs. These states are generally not supported on server processors today due to their long latencies. |
+
+> [!NOTE]
+> As we can see, deeper `CCx` induces longer wake up latency, and this is why states need to be entered carefully. The lantencies in this table are from a specific article and might vary from one model to another.  
+
+# Requesting and entering C-States
 
 # Ressources
 

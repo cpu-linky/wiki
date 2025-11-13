@@ -91,6 +91,8 @@ In order to request C-States, there are 2 differents ways :
 > [!TIP]
 > The support of `MWAIT` instructions can be tested trough the `cpuid` instruction, with `CPUID.01H:ECX.MONITOR[bit 3]`. See [our repo about `cpuid`](https://github.com/cpu-linky/cpuid) for easy interraction
 
+The CPU is the only one solving the C-States.
+
 # Ressources
 
 - [official Intel documentation of CPU power in 12th generation model](https://edc.intel.com/content/www/us/en/design/ipla/software-development-platforms/client/platforms/alder-lake-desktop/12th-generation-intel-core-processors-datasheet-volume-1-of-2/011/power-management/)

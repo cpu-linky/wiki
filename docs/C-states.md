@@ -72,7 +72,7 @@ Threads exists not on a physical level, only a *logical* one. Therefore, a **Thr
 
 ## Package C-States
 
-A package C-State or `PCx` request is determined by the value of the lowest `CCx` among all cores. It means that i requires that all core are at least in `CCx` with $ x > 1 $ .
+A package C-State or `PCx` request is determined by the value of the lowest `CCx` among all cores. It means that i requires that all core are at least in `CCx` with $` x > 1 `$ .
 
 > [!NOTE]
 > `PCx` are slighly more complex than the other, and we need to check if they are relevant for us before investigating more into them
@@ -90,8 +90,6 @@ In order to request C-States, there are 2 differents ways :
 
 > [!TIP]
 > The support of `MWAIT` instructions can be tested trough the `cpuid` instruction, with `CPUID.01H:ECX.MONITOR[bit 3]`. See [our repo about `cpuid`](https://github.com/cpu-linky/cpuid) for easy interraction
-
-The CPU is the only one solving the C-States.
 
 # Ressources
 

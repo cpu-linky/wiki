@@ -1,5 +1,7 @@
 This page aims to explain and present all tools which are used by Linux to interract with the CPU. It will not deal with tools used by the user to control the performance states. 
 
+# P-States
+
 # `CPUFreq` for fixing dynamic freqencies
 
 `CPUFreq` was implemented into the **Linux Kernel** and is the tool used by Linux to control the frequencies of the cores. It is really interesting because it allows to fix dynamix values for the frequencies, not only pre fixed values. 
@@ -104,7 +106,47 @@ other cases (for example, when there's a "daemonized" function that
 wakes up every second), use cpufreq_driver_target to take policy->rwsem
 before the command is passed to the cpufreq driver.
 
+# C-States
+
+# `CPUIdle` for dealing with C-States
+
+`CPUIdle` is the tool from the Linux Kernel to control the C-States of the CPU. The goal of the OS is to distribute the computational power, and CPU cores are the logical units of the computational power. From the view of the OS, a core is a logical unit which can achieve a set of operations. For example, in a multi-core architecture the OS will consider each core individually because they can compute separately, even if they may share physical assets like cache. However, if one physical core can be shared in 2 or more unirs (because of multi threading) the OS will still consider separately both threads, **but** no decision resolved at the thread level. It means that both threads on the same core must be on the same C-State for it to be effective. 
+
+Linux defines *idle* as a specific task, which will be runned inside a core if no other tasks are available to run. This special task will be assigned by the CPU scheduler, and it is called the **idle loop**. This set of instructions may cause the CPU to enter a special, idle mode, where energy will saved. If the core does not support any idle mode it will just run a set of useless instructions. 
+
+## The idle loop
+
+The *idle loop* (the special idle task) will be run an amount of time, until the core has any other task to be runned. Each loop consists of two major elements : first the *governor* is called, in order to determine wich idle state should be applied. This state depends of the policy and this is why the governor is called. Then, the CPU driver is called to apply the state chosed by the governor, because only the driver has the right to apply a C-State. See the diagram below. 
+
+```mermaid
+---
+config:
+  theme: default
+---
+flowchart LR
+    A["Start"] --> n1["Call Governor"]
+    n1 --> n2["Call Driver"]
+    n2 --> n3["Untitled Node"]
+    n3 -- loop --> A
+    A@{ shape: start}
+    n3@{ shape: stop}
+```
+
+Governors need to find the most suitable idle state, given the environment of the system. Drivers are used to interract with the hardware. With this implementation, the definition of the governors are independant from the hardware, and the governors are the interface to the actual hardware. 
+
+Each idle state is represented by two values : the *target residency* and the *exit latency*. The first is the minimal duration of time the core has the stay in the designated idle state in order to spare energy (compared to staying in an upper state). The *exit latency* is the minimum amount of time required for a core to exit the idle state and start running instructions. 
+
+Saying that, we must understand how the governors are taking decision. They are only 2 types of information that the governor will look on. The first one is the time remaining until the next event (this is an exact time because the kernel is timered). The second is how much time was spent inside an idle state after it has exited the given state. Then, the governor will decide which idle state to go on, depending on the alogorithm implemented, ie the governor type (each governor has its own algorithm).
+
+There are 4 governors in the kernel :
+
+1. `menu`
+2. `TEO`
+3. `ladder`
+4. `haltpoll`
+
 # Ressources 
 
 - [Documentation from Linux Kernel about `CPUFreq`](https://www.kernel.org/doc/Documentation/cpu-freq/governors.txt#:~:text=The%20CPUfreq%20governor%20%22userspace%22%20allows,in%20the%20CPU%2Ddevice%20directory.&text=The%20CPUfreq%20governor%20%22ondemand%22%20sets,on%20the%20current%20system%20load.)
 - [AMD P-states driver](https://docs.kernel.org/admin-guide/pm/amd-pstate.html)
+- [Documentation from Linux Kernel about CPU Idle time managment](https://docs.kernel.org/admin-guide/pm/cpuidle.html)

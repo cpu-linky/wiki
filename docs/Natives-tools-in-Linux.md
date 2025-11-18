@@ -91,7 +91,7 @@ int __cpufreq_driver_target(struct cpufreq_policy *policy,
                                    unsigned int target_freq,
                                    unsigned int relation);
 ```
-> The difference between those 2 functions is subtile, but here is what the Kernelès documentation says :
+>[!TIP] The difference between those 2 functions is subtile, but here is what the Kernel's documentation says :
 > > What's the difference between these two functions? When your governor is
 in a direct code path of a call to governor callbacks, like
 governor->start(), the policy->rwsem is still held in the cpufreq core,

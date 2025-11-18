@@ -25,6 +25,9 @@ where `X` is the core of the CPU, or `*` if you want to see them all.
 > [!NOTE]
 > It is not sure if all governors are available every time or for each Linux version. There is a file called `/sys/devices/system/cpu/cpu*/cpufreq/scaling_available_governors`, containing only `performance` and `powersaver` in **Ubuntu 24.04**, so maybe all governors are not implemented.
 
+> [!NOTE]
+> `CPUFreq` is also used in addition with the official drivers from AMD or Intel. My labtop is equiped with *AMD Ryzen 7 Pro 8840HS* and the driver is `amd-pstate-amd`. It is printed in the `/sys/devices/system/cpu/cpu0/cpufreq/scaling_driver` file. See [here](https://docs.kernel.org/admin-guide/pm/amd-pstate.html) for a quick explaination on drivers. 
+
 ## Existing governors
 
 ### Performance  
@@ -104,3 +107,4 @@ before the command is passed to the cpufreq driver.
 # Ressources 
 
 - [Documentation from Linux Kernel about `CPUFreq`](https://www.kernel.org/doc/Documentation/cpu-freq/governors.txt#:~:text=The%20CPUfreq%20governor%20%22userspace%22%20allows,in%20the%20CPU%2Ddevice%20directory.&text=The%20CPUfreq%20governor%20%22ondemand%22%20sets,on%20the%20current%20system%20load.)
+- [AMD P-states driver](https://docs.kernel.org/admin-guide/pm/amd-pstate.html)

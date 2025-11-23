@@ -150,3 +150,4 @@ There are 4 governors in the kernel :
 - [Documentation from Linux Kernel about `CPUFreq`](https://www.kernel.org/doc/Documentation/cpu-freq/governors.txt#:~:text=The%20CPUfreq%20governor%20%22userspace%22%20allows,in%20the%20CPU%2Ddevice%20directory.&text=The%20CPUfreq%20governor%20%22ondemand%22%20sets,on%20the%20current%20system%20load.)
 - [AMD P-states driver](https://docs.kernel.org/admin-guide/pm/amd-pstate.html)
 - [Documentation from Linux Kernel about CPU Idle time managment](https://docs.kernel.org/admin-guide/pm/cpuidle.html)
+- [Documentation from Linux Kernel about interfaces of CPU Idle governors](https://docs.kernel.org/driver-api/pm/cpuidle.html)

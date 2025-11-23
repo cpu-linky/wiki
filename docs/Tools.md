@@ -2,7 +2,7 @@ Curated list of tools to interract with C-States, along with tutorials and resul
 
 # `CPUPower`
 
-`cpupower` is a very popular, native linux tool, and easy to interract with. It displays informations related to the power managment side of the CPU, includind C-States (and P-States but it is not relevant here). `cpupower` interracts with the `/sys/` file system to get infos and to apply requests from the user. 
+`cpupower` is a very popular, native linux tool, and easy to interract with. It displays informations related to the power managment side of the CPU, includind C-States and P-States. `cpupower` interracts with the `/sys/` file system to get infos and to apply requests from the user. 
 
 # `turbostat`
 

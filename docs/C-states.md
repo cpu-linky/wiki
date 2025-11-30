@@ -1,5 +1,15 @@
 **C-states** provide the ability to request that the CPU enters a low-power state by turning off some pieces of logic or even cores. 
 
+# C-states and P-States
+
+C-states are almost exclusive to any P-State.
+
+![c states and p states](./medias/img/Processor_Configuration_and_Control-2.png)
+
+> *Image from [uefi.org](https://uefi.org/htmlspecs/ACPI_Spec_6_4_html/08_Processor_Configuration_and_Control/processor-power-states.html)*
+
+As we can see, P-States exists only with `C0`, as it is the only "active" state.
+
 # Packages in a CPU
 
 First, it is important to understand what are the pieces of a CPU. We can split the whole CPU (as we name it usually) into 4 differents levels : 
